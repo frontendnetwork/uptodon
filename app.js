@@ -38,7 +38,6 @@ app.get("*", (req, res) => {
         // Check if there is already a post
         M.get(`timelines/tag/${process.env.HASHTAG}`, {}).then((resp) => {
           let data = resp;
-          console.log("We're here.");
           if (data.data[0].application) {
             if (
               data.data[0].application.name === process.env.APP_NAME &&
