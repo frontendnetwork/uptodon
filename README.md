@@ -1,7 +1,7 @@
 <div align="center">
 <img src="https://user-images.githubusercontent.com/4144601/220859980-3977252f-a091-485e-ab16-bea32bc66b58.svg" alt="Mastdon Uptime Bot" width="128">
 
-# Mastdon + UptimeRobot Bot
+# Uptodon
 
 A Node.js bot that posts to Mastdon if a service on UptimeRobot is down.
 
