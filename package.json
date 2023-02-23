@@ -4,7 +4,7 @@
   "description": "A bot that posts to Mastodon if a service is down",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "netlify-lambda build express",
     "start": "node app.js"
   },
   "repository": {
