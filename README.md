@@ -87,7 +87,7 @@ npm run start
 
 ## Set up a Webhook or Cronjob
 ### Webhook
-> **Warning** It is reccomended to set up a webhook – This is best practice! 
+> **Warning** It is recomended to set up a webhook – This is best practice! 
 
 Set up the Webhook in your [UptimeRobot*](https://uptimerobot.com/?rid=b61ec8a31b3087) alert contacts - [Learn more](https://blog.uptimerobot.com/web-hook-alert-contacts-new-feature/).
 <br />This webhook should point to the URL of your [Deployment](#deploy), so it can automatically trigger the bot when a downtime is detected. 
