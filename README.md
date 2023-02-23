@@ -44,39 +44,39 @@ You will notice that the bot is not only sending a status to Mastdon, but also i
 
 You can change those images in `img/up.png` and `img/down.png`. 
 
-If you choose to not send images, change the following lines ([48-57](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/app.js#L48-L57)):
+If you choose to not send images, change the following lines ([44-51](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/app.js#L44-L51)):
 ````javascript
-let id;
-M.post("media", {
+const mediaResp = await M.post("media", {
   file: fs.createReadStream("img/up.png"),
-}).then((resp) => {
-  id = resp.data.id;
-    M.post("statuses", {
-      status: `#${process.env.HASHTAG} is up and running again. We apologize for any inconvenience.`,
-      media_ids: [id],
-  });
+});
+const mediaId = mediaResp.data.id;
+await M.post("statuses", {
+  status: `#${process.env.HASHTAG} is up and running again. We apologize for any inconvenience.`,
+  media_ids: [mediaId],
 });
 ````
 to:
 ````javascript
-M.post('statuses', { status: `#${process.env.HASHTAG} is up and running again. We apologize for any inconvenience.`})
+await M.post("statuses", {
+  status: `#${process.env.HASHTAG} is up and running again. We apologize for any inconvenience.`
+});
 ````
-and these lines ([81-90](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/app.js#L81-L90), [109-118](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/app.js#L109-L118), [139-148](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/app.js#L139-L148)):
+and these lines ([66-73](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/app.js#L66-L73), [83-90](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/app.js#L83-L90)):
 ````javascript
-let id;
-M.post("media", {
+const mediaResp = await M.post("media", {
   file: fs.createReadStream("img/down.png"),
-}).then((resp) => {
-  id = resp.data.id;
-    M.post("statuses", {
-    status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`,
-    media_ids: [id],
-  });
+});
+const mediaId = mediaResp.data.id;
+await M.post("statuses", {
+  status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`,
+  media_ids: [mediaId],
 });
 ````
 to:
 ````javascript
-M.post('statuses', { status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`})
+await M.post("statuses", {
+  status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`
+});
 ````
 
 ## Run the app
