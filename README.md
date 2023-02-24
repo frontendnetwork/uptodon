@@ -10,7 +10,12 @@ A Node.js bot that posts to Mastodon if a service on UptimeRobot is down.
 ![Screenshot of Mastdon Post](https://user-images.githubusercontent.com/4144601/220864964-7afcef23-950a-4f06-a15e-2fe4d3c30989.png)
 </div>
 
-## Setup 
+## 👋 Introduction 
+Uptodon is a simple and lightweight bot written in Node.js that automatically toots to any account on any Mastodon instance, if a certain monitor in your UptimeRobot account reports a downtime. 
+
+You can automate your workflow and inform the followers of your account that your service is down and also when it's up again, so you can focus on fixing what causes the downtime of your service. 
+
+## 🧑🏽‍💻 Setup 
 ### Prerequisites
 To use the bot, you'll need:
 * An account on any Mastodon instance
@@ -22,7 +27,7 @@ To use the bot, you'll need:
   
 * An [UptimeRobot*](https://uptimerobot.com/?rid=b61ec8a31b3087) account (Paid or free)
 * Your [UptimeRobot API Keys*](https://uptimerobot.com/api/?rid=b61ec8a31b3087) (for a specific monitor)
-* [Node.js / npm installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) on your system and server
+* [Node.js / npm installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ### Get started 
 Open up the repo in your IDE and run:
@@ -71,13 +76,13 @@ PORT="1035" # Change the port if you want to do so, e.g. to 3000
 DEBUG="true" # Only set this to true if you know what you are doing: This will instantly trigger a downtime post if the app is started
 ````
 
-## Run the app
+## 🏃🏽‍♀️ Run the app
 You should be good to go now. Just run:
 ````bash
 npm run start 
 ````
 
-## Set up a Webhook or Cronjob
+## 🪝 Set up a Webhook or Cronjob
 ### Webhook
 Set up the Webhook in your [UptimeRobot*](https://uptimerobot.com/?rid=b61ec8a31b3087) alert contacts - [Learn more](https://blog.uptimerobot.com/web-hook-alert-contacts-new-feature/).
 <br />This webhook should point to the URL of your [Deployment](#deploy), so it can automatically trigger the bot when a downtime is detected. 
@@ -98,7 +103,7 @@ If you're using the cronjob on your own server, it is recommended to execute it 
 */2 * * * * /usr/bin/wget --spider "https://bot.yourdomain.com" >/dev/null 2>&1
 ````
 
-## Deploy
+## 🛫 Deploy
 To deploy the bot to a server, some additional steps might be required, depending on your hosting provider or server provider.
 It's best to check your provider's documentation and see how you can run Node.js applications. 
 
@@ -114,7 +119,7 @@ You can find the variables in the [`.env.example`](https://github.com/JokeNetwor
 
 [![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jokenetwork/uptodon)
 
-## Miscellaneous
+## 🔗 Miscellaneous
 ### Dependencies
 This repo depends on:
 * [hylyh/node-mastodon](https://github.com/hylyh/node-mastodon) – Thanks to @hylyh 
@@ -127,7 +132,6 @@ This repo depends on:
 * [ ] Get rid of the necessary Hashtag and use endpoint [accounts/statuses](https://docs.joinmastodon.org/methods/accounts/#statuses) instead
 * [ ] Make the up/down toots customizable  
 * [ ] Add other Uptime services (e.g. BetterUptime / Open-Source services)
-
 
 ### Disclaimer
 Please use this bot only on your own instances or talk to the admins of your instance if it's okay to let a bot like this run, especially if you're using [Cronjobs](#cronjob).
