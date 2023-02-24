@@ -7,7 +7,10 @@ A Node.js bot that posts to Mastodon if a service on UptimeRobot is down.
 
 <br/>
 
-![Screenshot of Mastdon Post](https://user-images.githubusercontent.com/4144601/220864964-7afcef23-950a-4f06-a15e-2fe4d3c30989.png)
+<picture>
+	  <source srcset="https://user-images.githubusercontent.com/4144601/220864964-7afcef23-950a-4f06-a15e-2fe4d3c30989.png" media="(prefers-color-scheme: dark)">
+	  <img src="https://user-images.githubusercontent.com/4144601/221250665-bb1c7829-f437-4a50-8210-ec5cdeb8f5de.png" alt="Screenshot of Mastdon Post">
+	</picture>
 </div>
 
 ## 👋 Introduction 
@@ -23,8 +26,11 @@ To use the bot, you'll need:
 * An application with read (`read:statuses`) and write (`write:media`, `write:statuses`) rights on that instance and the access token
   <details><summary>Full explanation</summary>
   Go to your Mastodon Instance. Then go to Preferences → Development → New application → Enter your application name and apply the following settings:<br /><br />
-  <img width="1000" alt="Rights" src="https://user-images.githubusercontent.com/4144601/221242229-0738ad6d-da4b-4500-8171-faa260a02edb.png"></details>
-  
+  <picture>
+	  <source srcset="https://user-images.githubusercontent.com/4144601/221251026-e6888ef5-7a80-4dc7-aa1d-b7eef666be95.png" media="(prefers-color-scheme: dark)">
+	  <img src="https://user-images.githubusercontent.com/4144601/221242229-0738ad6d-da4b-4500-8171-faa260a02edb.png" alt="Rights of the application">
+	</picture>
+  </details>
 * An [UptimeRobot*](https://uptimerobot.com/?rid=b61ec8a31b3087) account (Paid or free)
 * Your [UptimeRobot API Keys*](https://uptimerobot.com/api/?rid=b61ec8a31b3087) (for a specific monitor)
 * [Node.js / npm installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
@@ -87,7 +93,10 @@ npm run start
 Set up the Webhook in your [UptimeRobot*](https://uptimerobot.com/?rid=b61ec8a31b3087) alert contacts - [Learn more](https://blog.uptimerobot.com/web-hook-alert-contacts-new-feature/).
 <br />This webhook should point to the URL of your [Deployment](#deploy), so it can automatically trigger the bot when a downtime is detected. 
 
-![webhook](https://user-images.githubusercontent.com/4144601/221245004-8cb14437-71d9-4f55-b70f-9fe09220ca7d.png)
+<picture>
+	  <source srcset="https://user-images.githubusercontent.com/4144601/221251596-7f92ea32-cff3-409d-a9db-ed6ae03df5bb.png" media="(prefers-color-scheme: dark)">
+	  <img src="https://user-images.githubusercontent.com/4144601/221245004-8cb14437-71d9-4f55-b70f-9fe09220ca7d.png" alt="Webhook setup in the UptimeRobot settings">
+</picture>
 
 This is best practice, but you will need a paid account on UptimeRobot for that. 
 
