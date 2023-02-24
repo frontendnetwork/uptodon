@@ -1,5 +1,5 @@
 {
-  "name": "mastodon-uptime-bot",
+  "name": "uptodon",
   "version": "1.0.0",
   "description": "A bot that posts to Mastodon if a service is down",
   "main": "app.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jokenetwork/mastodon-uptime-bot.git"
+    "url": "git+https://github.com/jokenetwork/uptodon.git"
   },
   "author": "Philip Brembeck",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jokenetwork/mastodon-uptime-bot/issues"
+    "url": "https://github.com/jokenetwork/uptodon/issues"
   },
-  "homepage": "https://github.com/jokenetwork/mastodon-uptime-bot#readme",
+  "homepage": "https://github.com/jokenetwork/uptodon#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",

@@ -17,8 +17,8 @@ To use the bot, you'll need:
 
 * An application with read (`read:statuses`) and write (`write:media`, `write:statuses`) rights on that instance and the access token
   <details><summary>Full explanation</summary>
-  Go to your Mastodon Instance. Then go to Preferences → Development → New application → Enter your application name and apply the following settings:<br />
-  <img width="450" alt="Rights" src="https://user-images.githubusercontent.com/4144601/220865942-2530cea0-2911-4ddd-998b-f0da0cae307a.png"></details>
+  Go to your Mastodon Instance. Then go to Preferences → Development → New application → Enter your application name and apply the following settings:<br /><br />
+  <img width="1000" alt="Rights" src="https://user-images.githubusercontent.com/4144601/221242229-0738ad6d-da4b-4500-8171-faa260a02edb.png"></details>
   
 * An [UptimeRobot*](https://uptimerobot.com/?rid=b61ec8a31b3087) account (Paid or free)
 * Your [UptimeRobot API Keys*](https://uptimerobot.com/api/?rid=b61ec8a31b3087) (for a specific monitor)
@@ -30,7 +30,7 @@ Open up the repo in your IDE and run:
 npm install
 ````
 
-Open up the [`.env.example`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/.env.example), rename it to `.env` and insert your credentials:
+Open up the [`.env.example`](https://github.com/JokeNetwork/uptodon/blob/main/.env.example), rename it to `.env` and insert your credentials:
 ````.env
 # Mastodon app
 INSTANCE="https://mastodon.social" # Your mastodon instance
@@ -49,7 +49,7 @@ UPTIME_ROBOT_API_KEY="uptimerobotsecret" # Your UptimeRobot Secret for the speci
 #### Images 
 You will notice that the bot is not only sending a status to Mastodon, but also images. 
 
-You can change those images in [`img/up.png`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/img/up.png) and [`img/down.png`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/img/down.png) or change their paths in the `.env` you created [earlier](#get-started). 
+You can change those images in [`img/up.png`](https://github.com/JokeNetwork/uptodon/blob/main/img/up.png) and [`img/down.png`](https://github.com/JokeNetwork/uptodon/blob/main/img/down.png) or change their paths in the `.env` you created [earlier](#get-started). 
 
 If you choose to not send images, you can also define this in the `.env`:
 ````.env
@@ -82,6 +82,8 @@ npm run start
 Set up the Webhook in your [UptimeRobot*](https://uptimerobot.com/?rid=b61ec8a31b3087) alert contacts - [Learn more](https://blog.uptimerobot.com/web-hook-alert-contacts-new-feature/).
 <br />This webhook should point to the URL of your [Deployment](#deploy), so it can automatically trigger the bot when a downtime is detected. 
 
+![webhook](https://user-images.githubusercontent.com/4144601/221245004-8cb14437-71d9-4f55-b70f-9fe09220ca7d.png)
+
 This is best practice, but you will need a paid account on UptimeRobot for that. 
 
 ### Cronjob
@@ -101,16 +103,16 @@ To deploy the bot to a server, some additional steps might be required, dependin
 It's best to check your provider's documentation and see how you can run Node.js applications. 
 
 ### Deploy to Vercel
-If you use the Deploy with Vercel button, you will be prompted to fill in the environment variables, which you can find in the [`.env.example`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
+If you use the Deploy with Vercel button, you will be prompted to fill in the environment variables, which you can find in the [`.env.example`](https://github.com/JokeNetwork/uptodon/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
 When these variables are not filled in, the bot will not build on Vercel.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot&env=INSTANCE,APP_NAME,HASHTAG,SECRET,UPTIME_ROBOT_API_KEY,IMAGE,PATH_UP,PATH_DOWN,PORT,DEBUG&envDescription=API%20Keys%20and%20variables%20needed%20to%20deploy%20the%20bot.&envLink=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot%2FREADME.md%23get-started&redirect-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fuptodon&env=INSTANCE,APP_NAME,HASHTAG,SECRET,UPTIME_ROBOT_API_KEY,IMAGE,PATH_UP,PATH_DOWN,PORT,DEBUG&envDescription=API%20Keys%20and%20variables%20needed%20to%20deploy%20the%20bot.&envLink=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fuptodon%2FREADME.md%23get-started&redirect-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fuptodon)
 
 ### Deploy to Netlify
 To deploy to Netlify, you have to fill in the environment variables yourself on Netlify before building, otherwise the bot will not build. 
-You can find the variables in the [`.env.example`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
+You can find the variables in the [`.env.example`](https://github.com/JokeNetwork/uptodon/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
 
-[![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jokenetwork/mastodon-uptime-bot)
+[![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jokenetwork/uptodon)
 
 ## Miscellaneous
 ### Dependencies
