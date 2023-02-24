@@ -99,7 +99,7 @@ If you do not have/do not want a paid account on UptimeRobot, you can also set u
 
 You can either set up a cronjob on your sever or use a free (limited executions!) webservice like [Easycron](https://www.easycron.com) that points to the the URL of your [Deployment](#deploy).
 
-If you using the cronjon on your own server, it is reccomended to execute it every 2 minutes:
+If you're using the cronjob on your own server, it is recommended to execute it every 2 minutes:
 ````crontab
 */2 * * * * /usr/bin/wget --spider "https://bot.yourdomain.com" >/dev/null 2>&1
 ````
@@ -110,6 +110,8 @@ It's best to check your provider's documentation and see how you can run Node.js
 You can also directly deploy the bot to Vercel:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot&env=INSTANCE,APP_NAME,HASHTAG,SECRET,UPTIME_ROBOT_API_KEY&envDescription=API%20Keys%20and%20variables%20needed%20to%20deploy%20the%20bot.&envLink=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot%2FREADME.md%23get-started&redirect-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot)
+
+[![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jokenetwork/mastodon-uptime-bot)
 
 ## Misc
 ### Dependencies
