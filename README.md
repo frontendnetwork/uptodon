@@ -30,53 +30,45 @@ Open up the repo in your IDE and run:
 npm install
 ````
 
-Open up the `.env.example`, rename it to `.env` and insert your credentials:
+Open up the [`.env.example`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/.env.example), rename it to `.env` and insert your credentials:
 ````.env
-INSTANCE="https://mastodon.social" // Your mastodon instance
-APP_NAME="Your app name" // The name you gave your app
-HASHTAG="Yourhashtag" // The hashtag you want to use
-SECRET="secret" // The access token of your mastodon app
-UPTIME_ROBOT_API_KEY="uptimerobotsecret" // Your UptimeRobot Secret for the specific monitor you want to toot about
+# Mastdon app
+INSTANCE="https://mastodon.social" # Your mastodon instance
+APP_NAME="Your app name" # The name you gave your app earlier 
+HASHTAG="Yourhashtag" # The hashtag you want to use for posts
+SECRET="secret" # The access token of your mastodon app
+
+# Uptime Robot
+UPTIME_ROBOT_API_KEY="uptimerobotsecret" # Your UptimeRobot Secret for the specific monitor you want to toot about
+
+...
 ````
 
 ### Configuration
+
+#### Images 
 You will notice that the bot is not only sending a status to Mastdon, but also images. 
 
-You can change those images in `img/up.png` and `img/down.png`. 
+You can change those images in `img/up.png` and `img/down.png` or change their paths in the `.env` you created in [Get started](#get-started). 
 
-If you choose to not send images, change the following lines ([44-51](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/app.js#L44-L51)):
-````javascript
-const mediaResp = await M.post("media", {
-  file: fs.createReadStream("img/up.png"),
-});
-const mediaId = mediaResp.data.id;
-await M.post("statuses", {
-  status: `#${process.env.HASHTAG} is up and running again. We apologize for any inconvenience.`,
-  media_ids: [mediaId],
-});
+If you choose to not send images, you can also define this in the `.env`:
+````.env
+# If you want to use custom images, set IMAGE to true and set the path to the image in PATH_UP and PATH_DOWN
+IMAGE="true" # Set to false if you do not want to send images
+PATH_UP="img/up.png" # Set path for the image when the service is up again
+PATH_DOWN="img/down.png" # Set path for the image when the service is down
 ````
-to:
-````javascript
-await M.post("statuses", {
-  status: `#${process.env.HASHTAG} is up and running again. We apologize for any inconvenience.`
-});
-````
-and these lines ([66-73](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/app.js#L66-L73), [83-90](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/app.js#L83-L90)):
-````javascript
-const mediaResp = await M.post("media", {
-  file: fs.createReadStream("img/down.png"),
-});
-const mediaId = mediaResp.data.id;
-await M.post("statuses", {
-  status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`,
-  media_ids: [mediaId],
-});
-````
-to:
-````javascript
-await M.post("statuses", {
-  status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`
-});
+
+#### Application configuration
+You can also define the port on which the bot should be running as well as if you want to use Debug-mode.
+
+> **Notice**
+> Debug mode is quite straight forward but also a bit dangerous to use. Setting the debug-mode to true will instantly trigger a downtime post if the app is started.
+
+````.env
+# App config
+PORT="1035" # Change the port if you want to do so, e.g. to 3000
+DEBUG="true" # Only set this to true if you know what you are doing: This will instantly trigger a downtime post if the app is started
 ````
 
 ## Run the app
@@ -87,7 +79,8 @@ npm run start
 
 ## Set up a Webhook or Cronjob
 ### Webhook
-> **Warning** It is recomended to set up a webhook – This is best practice! 
+> **Warning** 
+> It is recomended to set up a webhook – This is best practice! 
 
 Set up the Webhook in your [UptimeRobot*](https://uptimerobot.com/?rid=b61ec8a31b3087) alert contacts - [Learn more](https://blog.uptimerobot.com/web-hook-alert-contacts-new-feature/).
 <br />This webhook should point to the URL of your [Deployment](#deploy), so it can automatically trigger the bot when a downtime is detected. 
@@ -107,11 +100,22 @@ If you're using the cronjob on your own server, it is recommended to execute it 
 ## Deploy
 To deploy the bot to a server, some additional steps might be required depending on your hoster or server provider.
 It's best to check your provider's documentation and see how you can run Node.js applications. 
+
+### Deploy to Vercel
 You can also directly deploy the bot to Vercel:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot&env=INSTANCE,APP_NAME,HASHTAG,SECRET,UPTIME_ROBOT_API_KEY&envDescription=API%20Keys%20and%20variables%20needed%20to%20deploy%20the%20bot.&envLink=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot%2FREADME.md%23get-started&redirect-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot&env=INSTANCE,APP_NAME,HASHTAG,SECRET,UPTIME_ROBOT_API_KEY,IMAGE,PATH_UP,PATH_DOWN,PORT,DEBUG&envDescription=API%20Keys%20and%20variables%20needed%20to%20deploy%20the%20bot.&envLink=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot%2FREADME.md%23get-started&redirect-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot)
+
+Please note that you have to fill in the environment variables yourself before building, otherwise the bot will not build on Vercel. 
+
+If you use the Deploy with Vercel button, you will be promted to fill in the environment variables, which you can find in the [`.env.example`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
+
+### Deploy to Netlify
 
 [![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jokenetwork/mastodon-uptime-bot)
+
+Please note that you have to fill in the environment variables yourself before building, otherwise the bot will not build on Netlify. 
+You can find the variables in the [`.env.example`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
 
 ## Misc
 ### Dependencies

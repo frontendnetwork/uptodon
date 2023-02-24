@@ -27,7 +27,11 @@ const getUptimeStatus = async () => {
     });
   });
   const monitor = JSON.parse(body);
-  return monitor.monitors[0].status === 2 ? "up" : "down";
+  if (process.env.DEBUG === "true") {
+    return "down";
+  } else {
+    return monitor.monitors[0].status === 2 ? "up" : "down";
+  }
 };
 
 app.get("*", async (req, res) => {
@@ -41,18 +45,32 @@ app.get("*", async (req, res) => {
     latestPost.content.includes("seems to be down")
   ) {
     if (uptime === "up") {
-      const mediaResp = await M.post("media", {
-        file: fs.createReadStream("img/up.png"),
-      });
-      const mediaId = mediaResp.data.id;
-      await M.post("statuses", {
-        status: `#${process.env.HASHTAG} is up and running again. We apologize for any inconvenience.`,
-        media_ids: [mediaId],
-      });
-      res.status(200).json(`Found a post from ${process.env.APP_NAME}. Service is up again, posted running again.`);
+      if (process.env.IMAGE === "true") {
+        const mediaResp = await M.post("media", {
+          file: fs.createReadStream(process.env.PATH_UP),
+        });
+        const mediaId = mediaResp.data.id;
+        await M.post("statuses", {
+          status: `#${process.env.HASHTAG} is up and running again. We apologize for any inconvenience.`,
+          media_ids: [mediaId],
+        });
+      } else {
+        await M.post("statuses", {
+          status: `#${process.env.HASHTAG} is up and running again. We apologize for any inconvenience.`,
+        });
+      }
+      res
+        .status(200)
+        .json(
+          `Found a post from ${process.env.APP_NAME}. Service is up again, posted running again.`
+        );
       return;
     } else {
-      res.status(200).json(`Found a post from ${process.env.APP_NAME}. Service is still down, did nothing.`);
+      res
+        .status(200)
+        .json(
+          `Found a post from ${process.env.APP_NAME}. Service is still down, did nothing.`
+        );
       return;
     }
   }
@@ -63,40 +81,60 @@ app.get("*", async (req, res) => {
     latestPost.content.includes("up and running again")
   ) {
     if (uptime === "down") {
+      if (process.env.IMAGE === "true") {
+        const mediaResp = await M.post("media", {
+          file: fs.createReadStream(process.env.PATH_DOWN),
+        });
+        const mediaId = mediaResp.data.id;
+        await M.post("statuses", {
+          status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`,
+          media_ids: [mediaId],
+        });
+      } else {
+        await M.post("statuses", {
+          status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`,
+        });
+      }
+      res
+        .status(200)
+        .json(
+          `Found an uptime post from ${process.env.APP_NAME}. Service is down, posted down.`
+        );
+      return;
+    } else {
+      res
+        .status(200)
+        .json(
+          `Found an uptime post from ${process.env.APP_NAME}. Service is up, did nothing.`
+        );
+      return;
+    }
+  }
+
+  if (uptime === "down") {
+    if (process.env.IMAGE === "true") {
       const mediaResp = await M.post("media", {
-        file: fs.createReadStream("img/down.png"),
+        file: fs.createReadStream(process.env.PATH_DOWN),
       });
       const mediaId = mediaResp.data.id;
       await M.post("statuses", {
         status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`,
         media_ids: [mediaId],
       });
-      res.status(200).json(`Found an uptime post from ${process.env.APP_NAME}. Service is down, posted down.`);
-      return;
     } else {
-      res.status(200).json(`Found an uptime post from ${process.env.APP_NAME}. Service is up, did nothing.`);
-      return;
+      await M.post("statuses", {
+        status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`,
+      });
     }
-  }
-
-  if (uptime === "down") {
-    const mediaResp = await M.post("media", {
-      file: fs.createReadStream("img/down.png"),
-    });
-    const mediaId = mediaResp.data.id;
-    await M.post("statuses", {
-    status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`,
-    media_ids: [mediaId],
-    });
     res.status(200).json("Service is down. Posted down.");
     return;
-    } else {
+  } else {
     res.status(200).json("Service is up. Nothing to do.");
     return;
-    }
-    });
-    
-    const port = 1035;
-    app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
-    });
+  }
+});
+
+const port = process.env.PORT || 1035;
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});
