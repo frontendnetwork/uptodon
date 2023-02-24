@@ -62,7 +62,7 @@ PATH_DOWN="img/down.png" # Set path for the image when the service is down
 #### Application configuration
 You can also define the port on which the bot should be running as well as if you want to use Debug-mode.
 
-> **Notice**
+> **Note** <br/>
 > Debug mode is quite straight forward but also a bit dangerous to use. Setting the debug-mode to true will instantly trigger a downtime post if the app is started.
 
 ````.env
@@ -79,18 +79,16 @@ npm run start
 
 ## Set up a Webhook or Cronjob
 ### Webhook
-> **Warning** 
-> It is recomended to set up a webhook – This is best practice! 
-
 Set up the Webhook in your [UptimeRobot*](https://uptimerobot.com/?rid=b61ec8a31b3087) alert contacts - [Learn more](https://blog.uptimerobot.com/web-hook-alert-contacts-new-feature/).
 <br />This webhook should point to the URL of your [Deployment](#deploy), so it can automatically trigger the bot when a downtime is detected. 
 
 This is best practice, but you will need a paid account on UptimeRobot for that. 
 
 ### Cronjob
-If you do not have/do not want a paid account on UptimeRobot, you can also set up a Cronjob. 
+> **Warning** <br />
+> It is recomended to set up a webhook, as this is more accurate and you won't run into rate-limiting issues or overload your instance.
 
-You can either set up a cronjob on your sever or use a free (limited executions!) webservice like [Easycron](https://www.easycron.com) that points to the the URL of your [Deployment](#deploy).
+You can either set up a cronjob on your sever or use a webservice like [Easycron](https://www.easycron.com) that points to the the URL of your [Deployment](#deploy).
 
 If you're using the cronjob on your own server, it is recommended to execute it every 2 minutes:
 ````crontab
@@ -102,20 +100,16 @@ To deploy the bot to a server, some additional steps might be required depending
 It's best to check your provider's documentation and see how you can run Node.js applications. 
 
 ### Deploy to Vercel
-You can also directly deploy the bot to Vercel:
+If you use the Deploy with Vercel button, you will be promted to fill in the environment variables, which you can find in the [`.env.example`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
+When these variables are not filled in, the bot will not build on Vercel.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot&env=INSTANCE,APP_NAME,HASHTAG,SECRET,UPTIME_ROBOT_API_KEY,IMAGE,PATH_UP,PATH_DOWN,PORT,DEBUG&envDescription=API%20Keys%20and%20variables%20needed%20to%20deploy%20the%20bot.&envLink=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot%2FREADME.md%23get-started&redirect-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fmastodon-uptime-bot)
 
-Please note that you have to fill in the environment variables yourself before building, otherwise the bot will not build on Vercel. 
-
-If you use the Deploy with Vercel button, you will be promted to fill in the environment variables, which you can find in the [`.env.example`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
-
 ### Deploy to Netlify
+To deploy to Netlify you have to fill in the environment variables yourself on Netlify before building, otherwise the bot will not build. 
+You can find the variables in the [`.env.example`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
 
 [![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jokenetwork/mastodon-uptime-bot)
-
-Please note that you have to fill in the environment variables yourself before building, otherwise the bot will not build on Netlify. 
-You can find the variables in the [`.env.example`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
 
 ## Misc
 ### Dependencies
