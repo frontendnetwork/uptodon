@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://user-images.githubusercontent.com/4144601/220859980-3977252f-a091-485e-ab16-bea32bc66b58.svg" alt="Mastdon Uptime Bot" width="128">
+<img src="https://user-images.githubusercontent.com/4144601/220859980-3977252f-a091-485e-ab16-bea32bc66b58.svg" alt="Uptodon" width="128">
 
 # Uptodon
 
