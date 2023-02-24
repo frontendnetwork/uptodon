@@ -49,7 +49,7 @@ UPTIME_ROBOT_API_KEY="uptimerobotsecret" # Your UptimeRobot Secret for the speci
 #### Images 
 You will notice that the bot is not only sending a status to Mastdon, but also images. 
 
-You can change those images in `img/up.png` and `img/down.png` or change their paths in the `.env` you created in [Get started](#get-started). 
+You can change those images in [`img/up.png`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/img/up.png) and [`img/down.png`](https://github.com/JokeNetwork/mastodon-uptime-bot/blob/main/img/down.png) or change their paths in the `.env` you created [earlier](#get-started). 
 
 If you choose to not send images, you can also define this in the `.env`:
 ````.env
