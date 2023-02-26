@@ -56,6 +56,13 @@ UPTIME_ROBOT_API_KEY="uptimerobotsecret" # Your UptimeRobot Secret for the speci
 ````
 
 ### Configuration
+#### Message
+The messages of the bot are compeltely customizable. Please note that the defined Hashtag (`HASHTAG` in `.env`) will always be added before your custom message.
+
+````.env
+UP_MSG="is up and running again. We apologize for any inconvenience." # The hastag will be added before this
+DOWN_MSG="seems to be down. We are already investigating it." # The hastag will be added before this
+````
 
 #### Images 
 You will notice that the bot is not only sending a status to Mastodon, but also images. 

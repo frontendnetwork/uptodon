@@ -51,12 +51,12 @@ app.get("*", async (req, res) => {
         });
         const mediaId = mediaResp.data.id;
         await M.post("statuses", {
-          status: `#${process.env.HASHTAG} is up and running again. We apologize for any inconvenience.`,
+          status: `#${process.env.HASHTAG} ${process.env.UP_MSG}`,
           media_ids: [mediaId],
         });
       } else {
         await M.post("statuses", {
-          status: `#${process.env.HASHTAG} is up and running again. We apologize for any inconvenience.`,
+          status: `#${process.env.HASHTAG} ${process.env.UP_MSG}`,
         });
       }
       res
@@ -87,12 +87,12 @@ app.get("*", async (req, res) => {
         });
         const mediaId = mediaResp.data.id;
         await M.post("statuses", {
-          status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`,
+          status: `#${process.env.HASHTAG} ${process.env.DOWN_MSG}`,
           media_ids: [mediaId],
         });
       } else {
         await M.post("statuses", {
-          status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`,
+          status: `#${process.env.HASHTAG} ${process.env.DOWN_MSG}`,
         });
       }
       res
@@ -118,12 +118,12 @@ app.get("*", async (req, res) => {
       });
       const mediaId = mediaResp.data.id;
       await M.post("statuses", {
-        status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`,
+        status: `#${process.env.HASHTAG} ${process.env.DOWN_MSG}`,
         media_ids: [mediaId],
       });
     } else {
       await M.post("statuses", {
-        status: `#${process.env.HASHTAG} seems to be down. We are already investigating it.`,
+        status: `#${process.env.HASHTAG} ${process.env.DOWN_MSG}`,
       });
     }
     res.status(200).json("Service is down. Posted down.");
