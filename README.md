@@ -36,12 +36,11 @@ To use the bot, you'll need:
 * [Node.js / npm installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ### Get started 
-Open up the repo in your IDE and run:
+Copy [`.env.example`](https://github.com/JokeNetwork/uptodon/blob/main/.env.example) to `.env`:
 ````bash
-npm install
+cp .env.example .env
 ````
-
-Open up the [`.env.example`](https://github.com/JokeNetwork/uptodon/blob/main/.env.example), rename it to `.env` and insert your credentials:
+and insert your credentials in the now created [`.env`](https://github.com/JokeNetwork/uptodon/blob/main/.env.example):
 ````.env
 # Mastodon app
 INSTANCE="https://mastodon.social" # Your mastodon instance
@@ -94,6 +93,7 @@ You should be good to go now. Just run:
 ````bash
 npm run start 
 ````
+This also runs a `prestart` script, that runs `npm run install` to install all dependencies.
 
 ## 🪝 Set up a Webhook or Cronjob
 ### Webhook
@@ -146,7 +146,7 @@ This repo depends on:
 
 ### ToDo
 * [ ] Get rid of the necessary Hashtag and use endpoint [accounts/statuses](https://docs.joinmastodon.org/methods/accounts/#statuses) instead
-* [ ] Make the up/down toots customizable  
+* [x] Make the up/down toots customizable  
 * [ ] Add other Uptime services (e.g. BetterUptime / Open-Source services)
 
 ### Disclaimer
