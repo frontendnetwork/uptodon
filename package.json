@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "netlify-lambda build express",
+    "prestart": "npm install",
     "start": "node app.js"
   },
   "repository": {
