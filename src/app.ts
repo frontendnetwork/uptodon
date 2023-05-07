@@ -1,16 +1,28 @@
-const express = require("express");
-const request = require("request");
-const app = express();
-const fs = require("fs");
-require("dotenv").config();
-const Masto = require("mastodon");
+/// <reference path="./mastodon.d.ts" />
+import express, { Request, Response } from "express";
+import request from "request";
+import fs from "fs";
+import dotenv from "dotenv";
+import Masto from "mastodon";
+
+dotenv.config();
+
+interface Monitor {
+  status: number;
+}
+
+interface UptimeResponse {
+  monitors: Monitor[];
+}
 
 const M = new Masto({
   access_token: process.env.SECRET,
   api_url: `${process.env.INSTANCE}/api/v1/`,
 });
 
-const getUptimeStatus = async () => {
+const app = express();
+
+const getUptimeStatus = async (): Promise<"up" | "down"> => {
   const options = {
     method: "POST",
     url: "https://api.uptimerobot.com/v2/getMonitors",
@@ -20,13 +32,13 @@ const getUptimeStatus = async () => {
     },
     form: { api_key: process.env.UPTIME_ROBOT_API_KEY, format: "json" },
   };
-  const body = await new Promise((resolve, reject) => {
+  const body = await new Promise<string>((resolve, reject) => {
     request(options, (error, response, body) => {
       if (error) reject(error);
       resolve(body);
     });
   });
-  const monitor = JSON.parse(body);
+  const monitor = JSON.parse(body) as UptimeResponse;
   if (process.env.DEBUG === "true") {
     return "down";
   } else {
@@ -34,7 +46,7 @@ const getUptimeStatus = async () => {
   }
 };
 
-app.get("*", async (req, res) => {
+app.get("*", async (req: Request, res: Response) => {
   const uptime = await getUptimeStatus();
   const timeline = await M.get(`timelines/tag/${process.env.HASHTAG}`, {});
   const latestPost = timeline.data[0];
@@ -47,7 +59,7 @@ app.get("*", async (req, res) => {
     if (uptime === "up") {
       if (process.env.IMAGE === "true") {
         const mediaResp = await M.post("media", {
-          file: fs.createReadStream(process.env.PATH_UP),
+          file: fs.createReadStream(process.env.PATH_UP ?? ""),
         });
         const mediaId = mediaResp.data.id;
         await M.post("statuses", {
@@ -83,7 +95,7 @@ app.get("*", async (req, res) => {
     if (uptime === "down") {
       if (process.env.IMAGE === "true") {
         const mediaResp = await M.post("media", {
-          file: fs.createReadStream(process.env.PATH_DOWN),
+          file: fs.createReadStream(process.env.PATH_DOWN ?? ""),
         });
         const mediaId = mediaResp.data.id;
         await M.post("statuses", {
@@ -114,7 +126,7 @@ app.get("*", async (req, res) => {
   if (uptime === "down") {
     if (process.env.IMAGE === "true") {
       const mediaResp = await M.post("media", {
-        file: fs.createReadStream(process.env.PATH_DOWN),
+        file: fs.createReadStream(process.env.PATH_DOWN ?? ""),
       });
       const mediaId = mediaResp.data.id;
       await M.post("statuses", {

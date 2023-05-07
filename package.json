@@ -6,7 +6,7 @@
   "scripts": {
     "build": "netlify-lambda build express",
     "prestart": "npm install",
-    "start": "node app.js"
+    "start": "npx ts-node src/app.ts"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,15 @@
   },
   "homepage": "https://github.com/jokenetwork/uptodon#readme",
   "dependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mastodon": "^1.2.2"
+    "mastodon": "^1.2.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@types/request": "^2.48.8"
   }
 }
