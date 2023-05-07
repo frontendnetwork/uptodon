@@ -36,11 +36,11 @@ To use the bot, you'll need:
 * [Node.js / npm installed](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ### Get started 
-Copy [`.env.example`](https://github.com/JokeNetwork/uptodon/blob/main/.env.example) to `.env`:
+Copy [`.env.example`](https://github.com/frontendnetwork/uptodon/blob/main/.env.example) to `.env`:
 ````bash
 cp .env.example .env
 ````
-and insert your credentials in the now created [`.env`](https://github.com/JokeNetwork/uptodon/blob/main/.env.example):
+and insert your credentials in the now created [`.env`](https://github.com/frontendnetwork/uptodon/blob/main/.env.example):
 ````.env
 # Mastodon app
 INSTANCE="https://mastodon.social" # Your mastodon instance
@@ -66,7 +66,7 @@ DOWN_MSG="seems to be down. We are already investigating it." # The hastag will 
 #### Images 
 You will notice that the bot is not only sending a status to Mastodon, but also images. 
 
-You can change those images in [`img/up.png`](https://github.com/JokeNetwork/uptodon/blob/main/img/up.png) and [`img/down.png`](https://github.com/JokeNetwork/uptodon/blob/main/img/down.png) or change their paths in the `.env` you created [earlier](#get-started). 
+You can change those images in [`img/up.png`](https://github.com/frontendnetwork/uptodon/blob/main/img/up.png) and [`img/down.png`](https://github.com/frontendnetwork/uptodon/blob/main/img/down.png) or change their paths in the `.env` you created [earlier](#get-started). 
 
 If you choose to not send images, you can also define this in the `.env`:
 ````.env
@@ -124,16 +124,16 @@ To deploy the bot to a server, some additional steps might be required, dependin
 It's best to check your provider's documentation and see how you can run Node.js applications. 
 
 ### Deploy to Vercel
-If you use the Deploy with Vercel button, you will be prompted to fill in the environment variables, which you can find in the [`.env.example`](https://github.com/JokeNetwork/uptodon/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
+If you use the Deploy with Vercel button, you will be prompted to fill in the environment variables, which you can find in the [`.env.example`](https://github.com/frontendnetwork/uptodon/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
 When these variables are not filled in, the bot will not build on Vercel.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fuptodon&env=INSTANCE,APP_NAME,HASHTAG,SECRET,UPTIME_ROBOT_API_KEY,IMAGE,PATH_UP,PATH_DOWN,PORT,DEBUG&envDescription=API%20Keys%20and%20variables%20needed%20to%20deploy%20the%20bot.&envLink=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fuptodon%2FREADME.md%23get-started&redirect-url=https%3A%2F%2Fgithub.com%2FJokeNetwork%2Fuptodon)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffrontendnetwork%2Fuptodon&env=INSTANCE,APP_NAME,HASHTAG,SECRET,UPTIME_ROBOT_API_KEY,IMAGE,PATH_UP,PATH_DOWN,PORT,DEBUG&envDescription=API%20Keys%20and%20variables%20needed%20to%20deploy%20the%20bot.&envLink=https%3A%2F%2Fgithub.com%2Ffrontendnetwork%2Fuptodon%2FREADME.md%23get-started&redirect-url=https%3A%2F%2Fgithub.com%2Ffrontendnetwork%2Fuptodon)
 
 ### Deploy to Netlify
 To deploy to Netlify, you have to fill in the environment variables yourself on Netlify before building, otherwise the bot will not build. 
-You can find the variables in the [`.env.example`](https://github.com/JokeNetwork/uptodon/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
+You can find the variables in the [`.env.example`](https://github.com/frontendnetwork/uptodon/blob/main/.env.example), a description on what to enter can be found in [Get started](#get-started).
 
-[![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jokenetwork/uptodon)
+[![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/frontendnetwork/uptodon)
 
 ## 🔗 Miscellaneous
 ### Dependencies
