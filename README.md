@@ -79,7 +79,7 @@ PATH_DOWN="img/down.png" # Set path for the image when the service is down
 #### Application configuration
 You can also define the port on which the bot should be running as well as if you want to use Debug-mode.
 
-> **Note** <br/>
+> [!NOTE]
 > Debug mode is quite straight forward but also a bit dangerous to use. Setting the debug-mode to true will instantly trigger a downtime post if the app is started.
 
 ````.env
@@ -108,7 +108,7 @@ Set up the Webhook in your [UptimeRobot*](https://uptimerobot.com/?rid=b61ec8a31
 This is best practice, but you will need a paid account on UptimeRobot for that. 
 
 ### Cronjob
-> **Warning** <br />
+> [!WARNING]  
 > It is recomended to set up a webhook, as this is more accurate and you won't run into rate-limiting issues or overload your instance.
 > Please read the [Disclaimer](#disclaimer)!
 
