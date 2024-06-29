@@ -25,7 +25,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: uptodon-chart
-          path: uptodon-*.tgz
+          path: uptodon-0.1.0.tgz
 
       - name: Create GitHub Release
         id: create_release
@@ -45,6 +45,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: uptodon-*.tgz
-          asset_name: uptodon-{{ github.ref }}.tgz
+          asset_path: uptodon-0.1.0.tgz
+          asset_name: uptodon-${{ github.ref }}.tgz
           asset_content_type: application/gzip
