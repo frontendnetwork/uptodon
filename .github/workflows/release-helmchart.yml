@@ -1,34 +1,50 @@
-name: Release Charts
+name: Release Helm Chart
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - "v*.*.*"
 
 jobs:
   release:
-    # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
-    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
         with:
-          fetch-depth: 0
+          version: v3.7.1
 
-      - name: Configure Git
-        run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      - name: Package Helm chart
+        run: helm package helm/uptodon
 
-      - name: Install Helm
-        uses: azure/setup-helm@v4
+      - name: Upload release assets
+        uses: actions/upload-artifact@v3
+        with:
+          name: uptodon-chart
+          path: uptodon-*.tgz
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
 
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
+      - name: Upload Chart to Release
+        uses: actions/upload-release-asset@v1
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: uptodon-*.tgz
+          asset_name: uptodon-{{ github.ref }}.tgz
+          asset_content_type: application/gzip
