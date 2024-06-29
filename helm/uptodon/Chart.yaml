@@ -1,0 +1,27 @@
+apiVersion: v2
+name: uptodon
+description: A Helm chart for Uptodon - a Mastodon Uptime Service
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+
+keywords:
+  - Mastodon
+  - Uptime
+  - UptimeRobot
+  - Monitoring
+
+home: https://github.com/frontendnetwork/uptodon
+
+sources:
+  - https://github.com/frontendnetwork/uptodon
+
+maintainers:
+  - name: Philip Brembeck
+    email: philip@brembeck.me
+    url: https://philipbrembeck.com
+  - name: FrontendNetwork
+    url: https://frontendnet.work
+
+icon: https://user-images.githubusercontent.com/4144601/220859980-3977252f-a091-485e-ab16-bea32bc66b58.svg
+deprecated: false

@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "uptodon.fullname" . }}
+  labels:
+    {{- include "uptodon.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "uptodon.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "uptodon.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "uptodon.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          env:
+            - name: INSTANCE
+              value: "{{ .Values.env.INSTANCE }}"
+            - name: APP_NAME
+              value: "{{ .Values.env.APP_NAME }}"
+            - name: HASHTAG
+              value: "{{ .Values.env.HASHTAG }}"
+            - name: SECRET
+              value: "{{ .Values.env.SECRET }}"
+            - name: UP_MSG
+              value: "{{ .Values.env.UP_MSG }}"
+            - name: DOWN_MSG
+              value: "{{ .Values.env.DOWN_MSG }}"
+            - name: UPTIME_ROBOT_API_KEY
+              value: "{{ .Values.env.UPTIME_ROBOT_API_KEY }}"
+            - name: IMAGE
+              value: "{{ .Values.env.IMAGE }}"
+            - name: PATH_UP
+              value: "{{ .Values.env.PATH_UP }}"
+            - name: PATH_DOWN
+              value: "{{ .Values.env.PATH_DOWN }}"
+            - name: DEBUG
+              value: "{{ .Values.env.DEBUG }}"
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- with .Values.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
