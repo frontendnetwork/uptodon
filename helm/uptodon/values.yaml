@@ -18,8 +18,12 @@ env:
   INSTANCE: "https://mastodon.social"
   # -- Replace with your app name
   APP_NAME: "Your app name"
-  # -- Replace with your hashtag
+  # -- Optional hashtag to prefix messages and use as a fallback state source
   HASHTAG: "Yourhashtag"
+  # -- Optional Mastodon numeric account id for hashtag-free state lookup
+  ACCOUNT_ID: ""
+  # -- Optional Mastodon username/acct used to resolve ACCOUNT_ID automatically
+  ACCOUNT_USERNAME: ""
   # -- Replace with your secret
   SECRET: "secret"
   # -- Replace with your up message, hashtag will be in front of it
@@ -36,6 +40,8 @@ env:
   PATH_DOWN: "img/down.png"
   # -- Replace with true if you want to enable debug mode, this will instantly trigger a down post
   DEBUG: "false"
+  # -- Port the Node.js server listens on
+  PORT: "1035"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -100,11 +106,11 @@ resources:
 
 livenessProbe:
   httpGet:
-    path: /
+    path: /healthz
     port: http
 readinessProbe:
   httpGet:
-    path: /
+    path: /healthz
     port: http
 
 autoscaling:

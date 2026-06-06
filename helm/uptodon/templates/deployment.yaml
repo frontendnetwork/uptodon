@@ -47,6 +47,10 @@ spec:
               value: "{{ .Values.env.APP_NAME }}"
             - name: HASHTAG
               value: "{{ .Values.env.HASHTAG }}"
+            - name: ACCOUNT_ID
+              value: "{{ .Values.env.ACCOUNT_ID }}"
+            - name: ACCOUNT_USERNAME
+              value: "{{ .Values.env.ACCOUNT_USERNAME }}"
             - name: SECRET
               value: "{{ .Values.env.SECRET }}"
             - name: UP_MSG
@@ -63,6 +67,8 @@ spec:
               value: "{{ .Values.env.PATH_DOWN }}"
             - name: DEBUG
               value: "{{ .Values.env.DEBUG }}"
+            - name: PORT
+              value: "{{ .Values.env.PORT }}"
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
