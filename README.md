@@ -45,7 +45,9 @@ and insert your credentials in the now created [`.env`](https://github.com/front
 # Mastodon app
 INSTANCE="https://mastodon.social" # Your mastodon instance
 APP_NAME="Your app name" # The name you gave your app earlier 
-HASHTAG="Yourhashtag" # The hashtag you want to use for posts
+HASHTAG="Yourhashtag" # Optional: hashtag to add to posts and use as a fallback state source
+ACCOUNT_ID="" # Optional: numeric Mastodon account id for hashtag-free state lookup
+ACCOUNT_USERNAME="" # Optional: Mastodon username/acct to resolve ACCOUNT_ID automatically
 SECRET="secret" # The access token of your mastodon app
 
 # Uptime Robot
@@ -56,7 +58,7 @@ UPTIME_ROBOT_API_KEY="uptimerobotsecret" # Your UptimeRobot Secret for the speci
 
 ### Configuration
 #### Message
-The messages of the bot are compeltely customizable. Please note that the defined Hashtag (`HASHTAG` in `.env`) will always be added before your custom message.
+The messages of the bot are compeltely customizable. If `HASHTAG` is defined, it will be added before your custom message. For hashtag-free state lookup, configure `ACCOUNT_ID` or `ACCOUNT_USERNAME`.
 
 ````.env
 UP_MSG="is up and running again. We apologize for any inconvenience." # The hastag will be added before this
@@ -145,7 +147,7 @@ This repo depends on:
 * [UptimeRobot API*](https://uptimerobot.com/api/?rid=b61ec8a31b3087)
 
 ### ToDo
-* [ ] Get rid of the necessary Hashtag and use endpoint [accounts/statuses](https://docs.joinmastodon.org/methods/accounts/#statuses) instead
+* [x] Get rid of the necessary Hashtag and use endpoint [accounts/statuses](https://docs.joinmastodon.org/methods/accounts/#statuses) instead
 * [x] Make the up/down toots customizable  
 * [ ] Add other Uptime services (e.g. BetterUptime / Open-Source services)
 
